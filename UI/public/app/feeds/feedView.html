@@ -1,0 +1,35 @@
+<div class="row" ng-controller="FeedViewCtrl as vm">
+    <div class="col-sm-3 col-md-2 sidebar">
+        <button uib-popover-template="'feedRegister.html'" popover-title="Register Feed" type="button" popover-placement="auto bottom"
+        class="btn btn-default">Add Feed</button>
+        <ul class="nav nav-sidebar" ng-repeat="feed in vm.feeds">
+            <li><a href="#/feeds" ng-click="vm.getFeedItems(feed.name, $index)">{{ feed.name }}</a></li>
+        </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="container-fluid" ng-repeat="item in vm.feedItems">
+            <div class="row">
+                <h4><a href="{{item.link}}" target="_blank">{{ item.title }}</a></h4>
+                <hr/>
+                <blockquote>
+                    <p ng-bind-html="vm.sanitizeDescription(item.description)"></p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="feedRegister.html">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 form-group">
+                <input type="text" class="form-control" id="feedName" placeholder="Feed Name">
+            </div>
+            <div class="col-md-12 form-group">
+                <input type="text" class="form-control" id="feedUrl" placeholder="Feed Url">
+            </div>
+            <div class="col-sm-offset-3 col-md-12 form-group">
+                <button class="btn btn-default" ng-click="vm.sayHello(feedName.value, feedUrl.value)">Submit</button>
+            </div>
+        </div>
+    </div>
+</script>

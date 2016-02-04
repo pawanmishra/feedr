@@ -1,0 +1,25 @@
+{
+  "name": "feedr",
+  "version": "1.0.0",
+  "description": "Application for converting feeds into todos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www"
+  },
+  "author": "Pawan Mishra",
+  "license": "ISC",
+  "dependencies": {
+    "angular-animate": "^1.4.9",
+    "angular-sanitize": "^1.4.9",
+    "angular-ui-bootstrap": "^1.1.2",
+    "body-parser": "^1.14.2",
+    "cookie-parser": "^1.4.1",
+    "debug": "^2.2.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.3.7",
+    "node-rest-client": "^1.8.0",
+    "path": "^0.12.7",
+    "request": "^2.69.0"
+  }
+}
