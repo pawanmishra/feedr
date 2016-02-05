@@ -9,13 +9,23 @@ namespace FeedrInfrastructure.Model
     public class Feed
     {
         /// <summary>
-        /// Name of the feed
+        /// Unique FeedId
         /// </summary>
-        public string Name { get; set; }
+        public string feedId { get; set; }
 
         /// <summary>
-        /// Feed Url
+        /// Name of the site
         /// </summary>
-        public string Url { get; set; }
+        public string name { get; set; }
+
+        /// <summary>
+        /// Default feed url. Feed url should reflect the pagination index too.
+        /// </summary>
+        public string feedUrl { get; set; }
+
+        /// <summary>
+        /// Collection of <see cref="FeedItem"/>
+        /// </summary>
+        public List<FeedItem> feedItems { get; set; }
     }
 }

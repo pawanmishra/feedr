@@ -22,13 +22,13 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 form-group">
-                <input type="text" class="form-control" id="feedName" placeholder="Feed Name">
+                <input type="text" class="form-control" ng-model="vm.feedName" id="feedName" placeholder="Feed Name">
             </div>
             <div class="col-md-12 form-group">
-                <input type="text" class="form-control" id="feedUrl" placeholder="Feed Url">
+                <input type="text" class="form-control" ng-model="vm.feedUrl" id="feedUrl" placeholder="Feed Url">
             </div>
             <div class="col-sm-offset-3 col-md-12 form-group">
-                <button class="btn btn-default" ng-click="vm.sayHello(feedName.value, feedUrl.value)">Submit</button>
+                <button class="btn btn-default" ng-click="vm.addFeed()">Submit</button>
             </div>
         </div>
     </div>

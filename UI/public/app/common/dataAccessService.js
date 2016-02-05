@@ -13,6 +13,7 @@ var app;
                         return angular.fromJson(data);
                     },*/
                     post: { method: 'POST' },
+                    save: { method: 'POST' },
                     get: { method: 'GET', isArray: true },
                     query: { method: 'GET', isArray: false },
                     update: { method: 'PUT', isArray: false },

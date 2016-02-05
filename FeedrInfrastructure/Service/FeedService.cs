@@ -31,10 +31,10 @@ namespace FeedrInfrastructure.Service
         /// <param name="feed"></param>
         public async void SaveFeed(Feed feed)
         {
-            var result = _context.Feeds.Find(x => x.Name.Equals(feed.Name)).ToList().FirstOrDefault();
+            var result = _context.Feeds.Find(x => x.Name.Equals(feed.name)).ToList().FirstOrDefault();
             if (result != null) return;
 
-            FeedDocument feedDocument = new FeedDocument(feed.Name, feed.Url);
+            FeedDocument feedDocument = new FeedDocument(feed.name, feed.feedUrl);
             await _context.Feeds.InsertOneAsync(feedDocument);
         }
 

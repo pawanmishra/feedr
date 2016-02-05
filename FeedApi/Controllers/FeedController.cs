@@ -37,9 +37,10 @@ namespace FeedApi.Controllers
         }
 
         // POST: api/Feed
-        public void Post(Feed feed)
+        public IHttpActionResult Post(Feed feed)
         {
             _feedService.SaveFeed(feed);
+            return Ok();
         }
 
         // PUT: api/Feed/5

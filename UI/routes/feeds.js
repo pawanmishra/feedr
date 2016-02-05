@@ -4,7 +4,19 @@ var webApiUrl = 'http://localhost/FeedApi';
 var request = require('request');
 
 router.post('/feeds', function(req, res, next) {
-    
+    console.log(JSON.stringify(req.body));
+    request.post({
+        url: webApiUrl + '/api/Feed',  
+        body: JSON.stringify(req.body),
+        headers: { 'Content-Type': 'application/json' }
+        }, function(error, response, body)
+        {
+            if(error) {
+                console.error('Error occurred:', error);
+                return next(error);
+            }
+        res.sendStatus(200);
+    });
 });
 
 router.put('/teams/:teamName', function(req, res, next) {

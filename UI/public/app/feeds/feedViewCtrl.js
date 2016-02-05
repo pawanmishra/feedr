@@ -9,6 +9,7 @@ var app;
                 this.$sce = $sce;
                 this.feeds = [];
                 this.feedItems = [];
+                this.feedName = this.feedUrl = "";
                 this.initializeFeedList();
             }
             FeedViewCtrl.prototype.initializeFeedList = function () {
@@ -36,10 +37,13 @@ var app;
             FeedViewCtrl.prototype.sanitizeDescription = function (description) {
                 return this.$sce.trustAsHtml(description);
             };
-            FeedViewCtrl.prototype.sayHello = function (feedName, feedUrl) {
-                console.log("hello");
-                console.log(feedName);
-                console.log(feedUrl);
+            FeedViewCtrl.prototype.addFeed = function () {
+                var resource = this.dataAccessService.getFeedResource();
+                var _me = this;
+                var tempFeed = new app.domain.Feed("", this.feedName, this.feedUrl, []);
+                resource.save(tempFeed, function (data) {
+                    _me.$location.path('/');
+                });
             };
             FeedViewCtrl.$inject = ["dataAccessService", "$location", "$sce"];
             return FeedViewCtrl;

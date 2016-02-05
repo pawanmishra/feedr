@@ -5,12 +5,16 @@ module app.feedView {
         getFeedItems(feedName : string, index : number) : void;
         feedItems : app.domain.IFeedItem[];
         sanitizeDescription(description : string) : any;
-        sayHello(feedName : string, feedUrl : string) : void;
+        addFeed() : void;
+        feedName : string;
+        feedUrl : string;
     }
     
     export class FeedViewCtrl implements IFeedViewCtrl {
         feeds : app.domain.IFeed[];
         feedItems : app.domain.IFeedItem[];
+        feedName : string;
+        feedUrl : string;
         
         static $inject=["dataAccessService", "$location", "$sce"];
 		constructor(private dataAccessService : app.common.DataAccessService,
@@ -18,6 +22,8 @@ module app.feedView {
             private $sce : angular.ISCEService) {
 			this.feeds = [];
             this.feedItems = [];
+            this.feedName = this.feedUrl = "";
+            
             this.initializeFeedList();
 		}
         
@@ -49,10 +55,13 @@ module app.feedView {
             return this.$sce.trustAsHtml(description);
         }
         
-        sayHello(feedName : string, feedUrl : string) {
-            console.log("hello");
-            console.log(feedName);
-            console.log(feedUrl);
+        addFeed() {
+            var resource = this.dataAccessService.getFeedResource();
+            let _me = this;
+            let tempFeed = new app.domain.Feed("", this.feedName, this.feedUrl, []);
+            resource.save(tempFeed, (data) => {
+                _me.$location.path('/');
+            });
         }
     }
     
