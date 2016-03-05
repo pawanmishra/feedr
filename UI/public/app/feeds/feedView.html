@@ -2,9 +2,10 @@
     <div class="col-sm-3 col-md-2 sidebar">
         <button uib-popover-template="'feedRegister.html'" popover-title="Register Feed" type="button" popover-placement="auto bottom"
         class="btn btn-default">Add Feed</button>
-        <ul class="nav nav-sidebar" ng-repeat="feed in vm.feeds">
-            <li><a href="#/feeds" ng-click="vm.getFeedItems(feed.name, $index)">{{ feed.name }}</a></li>
-        </ul>
+        <hr />
+        <div class="list-group">
+            <a href="#/feeds" ng-repeat="feed in vm.feeds" class="list-group-item" ng-click="vm.getFeedItems(feed.name)">{{ feed.name }}</a>
+        </div>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <div class="container-fluid" ng-repeat="item in vm.feedItems">

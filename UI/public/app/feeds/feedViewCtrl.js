@@ -24,11 +24,11 @@ var app;
                     });
                 });
             };
-            FeedViewCtrl.prototype.getFeedItems = function (feedName, index) {
+            FeedViewCtrl.prototype.getFeedItems = function (feedName) {
                 var resource = this.dataAccessService.getFeedResource();
                 var _me = this;
                 resource.query({ feedName: feedName }, function (data) {
-                    angular.forEach(data.FeedItems, function (item) {
+                    angular.forEach(data, function (item) {
                         var feedItem = new app.domain.FeedItem(item.Link, item.Title, item.Description, item.Uid);
                         _me.feedItems.push(feedItem);
                     });

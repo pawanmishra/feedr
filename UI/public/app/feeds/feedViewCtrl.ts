@@ -40,11 +40,11 @@ module app.feedView {
             });
         }
         
-        getFeedItems(feedName : string, index : number) {
+        getFeedItems(feedName : string) {
             var resource = this.dataAccessService.getFeedResource();
             let _me = this;
             resource.query({feedName : feedName}, (data) => {
-                angular.forEach(data.FeedItems, function(item){
+                angular.forEach(data, function(item){
                     let feedItem = new app.domain.FeedItem(item.Link, item.Title, item.Description, item.Uid);
                     _me.feedItems.push(feedItem);
                 });

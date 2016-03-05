@@ -44,21 +44,21 @@ namespace FeedrInfrastructure.Service
         /// <param name="feedName">Name of the <see cref="Feed"/></param>
         /// <param name="index">Pagination index</param>
         /// <returns>Collection of <see cref="FeedItem"/></returns>
-        public IEnumerable<FeedItem> GetFeeds(string feedName, int index)
+        public IEnumerable<FeedItem> GetFeedItems(string feedName)
         {
             List<FeedItem> feedItems = new List<FeedItem>();
             var result = _context.Feeds.Find(x => x.Name.Equals(feedName)).ToList().FirstOrDefault();
             if(result != null)
             {
-                var updateUrl = result.FeedUrl.Replace("INDEX", index.ToString());
-                var latestArticles = Parser.parseFeed(updateUrl);
+                var latestArticles = Parser.parseFeed(result.FeedUrl);
                 foreach(var article in latestArticles)
                 {
+                    var feedItem = new FeedItem(article);
+                    feedItems.Add(feedItem);
+
                     if (!result.FeedItems.Any(x => x.Uid.Equals(article.Uid)))
-                    {
-                        var feedItem = new FeedItem(article);
+                    {   
                         result.FeedItems.Add(feedItem);
-                        feedItems.Add(feedItem);
                     }
                 }
 
@@ -81,16 +81,6 @@ namespace FeedrInfrastructure.Service
                 result.FeedItems.Add(feedItem);
                 await _context.Feeds.ReplaceOneAsync<FeedDocument>(x => x.Name == result.Name, result);
             }
-        }
-
-        /// <summary>
-        /// Get all <see cref="FeedItem"/> present in database for given <paramref name="feedName"/>
-        /// </summary>
-        /// <param name="feedName"></param>
-        /// <returns></returns>
-        public FeedDocument GetFeedItems(string feedName)
-        {
-            return _context.Feeds.Find(x => x.Name.Equals(feedName)).ToList().FirstOrDefault();
         }
     }
 }

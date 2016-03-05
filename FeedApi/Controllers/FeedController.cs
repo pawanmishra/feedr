@@ -28,14 +28,6 @@ namespace FeedApi.Controllers
             return Ok(feedItems);
         }
 
-        // GET: api/Feed?feed=geeksforgeeks&index=2
-        [Route("api/Feed/{feedName}/{index}")]
-        public IHttpActionResult Get(string feedName, int index)
-        {
-            var feedItems = _feedService.GetFeeds(feedName, index);
-            return Ok(feedItems);
-        }
-
         // POST: api/Feed
         public IHttpActionResult Post(Feed feed)
         {

@@ -15,7 +15,7 @@ var app;
                     post: { method: 'POST' },
                     save: { method: 'POST' },
                     get: { method: 'GET', isArray: true },
-                    query: { method: 'GET', isArray: false },
+                    query: { method: 'GET', isArray: true },
                     update: { method: 'PUT', isArray: false },
                     'delete': { method: 'DELETE', params: { feedName: "@feedName" } }
                 });
