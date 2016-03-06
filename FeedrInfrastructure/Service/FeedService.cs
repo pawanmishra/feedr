@@ -3,7 +3,6 @@ using MongoDB.Driver;
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Parser;
@@ -81,6 +80,15 @@ namespace FeedrInfrastructure.Service
                 result.FeedItems.Add(feedItem);
                 await _context.Feeds.ReplaceOneAsync<FeedDocument>(x => x.Name == result.Name, result);
             }
+        }
+
+        /// <summary>
+        /// Delete <paramref name="feedName"/> from the database
+        /// </summary>
+        /// <param name="feedName"></param>
+        public async void DeleteFeed(string feedName)
+        {
+            await _context.Feeds.DeleteOneAsync(x => x.Name.Equals(feedName));
         }
     }
 }

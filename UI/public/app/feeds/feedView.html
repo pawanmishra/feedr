@@ -3,9 +3,12 @@
         <button uib-popover-template="'feedRegister.html'" popover-title="Register Feed" type="button" popover-placement="auto bottom"
         class="btn btn-default">Add Feed</button>
         <hr />
-        <div class="list-group">
-            <a href="#/feeds" ng-repeat="feed in vm.feeds" class="list-group-item" ng-click="vm.getFeedItems(feed.name)">{{ feed.name }}</a>
-        </div>
+        <ul class="list-group">
+            <li ng-repeat="feed in vm.feeds" class="list-group-item">
+                <a href="#/feeds" ng-click="vm.getFeedItems(feed.name)">{{ feed.name }}</a>
+                <button type="button" class="close" ng-click="vm.deleteFeed(feed.name, $index)" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </li>
+        </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <div class="container-fluid" ng-repeat="item in vm.feedItems">
