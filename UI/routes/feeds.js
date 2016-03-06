@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 var webApiUrl = 'http://localhost/FeedApi';
 var request = require('request');
+// Request API : https://www.npmjs.com/package/request
 
 router.post('/feeds', function(req, res, next) {
-    console.log(JSON.stringify(req.body));
     request.post({
         url: webApiUrl + '/api/Feed',  
         body: JSON.stringify(req.body),
@@ -24,6 +24,12 @@ router.put('/teams/:teamName', function(req, res, next) {
 });
 
 router.delete('/feeds/:feedName', function(req, res, next) {
+    request.del(webApiUrl + '/api/Feed/' + req.params.feedName, function(error, response, body){
+       if(error) {
+           return next(error);
+       }
+       res.sendStatus(200); 
+    });
 })
 
 router.get('/feeds/:feedName', function(req, res, next) {

@@ -40,9 +40,19 @@ namespace FeedApi.Controllers
         {
         }
 
-        // DELETE: api/Feed/5
-        public void Delete(int id)
+        // DELETE: api/Feed/{feedName}
+        [Route("api/Feed/{feedName}")]
+        public IHttpActionResult Delete(string feedName)
         {
+            try
+            {
+                _feedService.DeleteFeed(feedName);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
     }
 }

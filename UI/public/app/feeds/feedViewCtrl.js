@@ -45,6 +45,16 @@ var app;
                     _me.$location.path('/');
                 });
             };
+            FeedViewCtrl.prototype.deleteFeed = function (feedName, index) {
+                var resource = this.dataAccessService.getFeedResource();
+                var _me = this;
+                resource.delete({ feedName: feedName }, function () {
+                    var remainingFeeds = _me.feeds.filter(function (x) { return x.name !== feedName; });
+                    _me.feeds = remainingFeeds;
+                }, function () {
+                    console.log("some error occured");
+                });
+            };
             FeedViewCtrl.$inject = ["dataAccessService", "$location", "$sce"];
             return FeedViewCtrl;
         })();

@@ -6,6 +6,7 @@ module app.feedView {
         feedItems : app.domain.IFeedItem[];
         sanitizeDescription(description : string) : any;
         addFeed() : void;
+        deleteFeed(feedName : string, index : number) : void;
         feedName : string;
         feedUrl : string;
     }
@@ -61,6 +62,17 @@ module app.feedView {
             let tempFeed = new app.domain.Feed("", this.feedName, this.feedUrl, []);
             resource.save(tempFeed, (data) => {
                 _me.$location.path('/');
+            });
+        }
+        
+        deleteFeed(feedName : string, index : number) {
+            var resource = this.dataAccessService.getFeedResource();
+            let _me = this;
+            resource.delete({feedName : feedName}, () => {
+                let remainingFeeds = _me.feeds.filter(x => x.name !== feedName);
+                _me.feeds = remainingFeeds;
+            }, () => {
+                console.log("some error occured");
             });
         }
     }
